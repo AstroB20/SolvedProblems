@@ -1,10 +1,12 @@
-def longestCommonPrefix(strs):
-    res=""
-    w=strs[0]
-    for i in range(len(w)):
-        for wd in strs:
-            if len(wd)==i or wd[i]!=w[i]:
-                return res
-        res+=w[i]
-x=longestCommonPrefix(["flower","flower","flower","flower"])
-print(x)
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        if not strs:
+            return ""
+        prefix = strs[0]
+        for s in strs[1:]:
+            while not s.startswith(prefix):
+                prefix = prefix[:-1]
+                if not prefix:
+                    return ""
+        return prefix
+        
