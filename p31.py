@@ -13,4 +13,5 @@ class Solution(object):
                 j -= 1
             nums[i], nums[j] = nums[j], nums[i]
         nums[i + 1:] = reversed(nums[i + 1:])
-        
+        return nums
+    
