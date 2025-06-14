@@ -19,3 +19,6 @@ class Solution(object):
         candidates.sort()
         backtrack(0, [], target)
         return res
+
+sol = Solution()
+print(sol.combinationSum([2, 3, 6, 7], 7))
