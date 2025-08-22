@@ -1,36 +1,27 @@
 class Solution {
     public int minimumArea(int[][] grid) {
-        int m = grid.length;
-        int n = grid[0].length;
-        int minArea = Integer.MAX_VALUE;
+        int m = grid.length, n = grid[0].length;
 
-        for (int left = 0; left < n; left++) {
-            for (int right = left; right < n; right++) {
-                int top = -1;
-                int bottom = -1;
-                for (int row = 0; row < m; row++) {
-                    boolean hasOne = false;
-                    for (int col = left; col <= right; col++) {
-                        if (grid[row][col] == 1) {
-                            hasOne = true;
-                            break;
-                        }
-                    }
-                    if (hasOne) {
-                        if (top == -1) {
-                            top = row;
-                        }
-                        bottom = row;
-                    }
-                }
-                if (top != -1) {
-                    int area = (right - left + 1) * (bottom - top + 1);
-                    minArea = Math.min(minArea, area);
+        int minRow = m, maxRow = -1;
+        int minCol = n, maxCol = -1;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    minRow = Math.min(minRow, i);
+                    maxRow = Math.max(maxRow, i);
+                    minCol = Math.min(minCol, j);
+                    maxCol = Math.max(maxCol, j);
                 }
             }
         }
 
-        return minArea == Integer.MAX_VALUE ? 0 : minArea;
+        if (maxRow == -1) {
+            return 0;
+        }
 
+        int height = maxRow - minRow + 1;
+        int width = maxCol - minCol + 1;
+        return height * width;
     }
 }
