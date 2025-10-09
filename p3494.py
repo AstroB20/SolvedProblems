@@ -6,20 +6,21 @@ class Solution(object):
         :rtype: int
         """
         n, m = len(skill), len(mana)
-        prev = [0] * m
-        curr = [0] * m
-
-        # Wizard 0 (base case)
-        prev[0] = skill[0] * mana[0]
-        for j in range(1, m):
-            prev[j] = prev[j-1] + skill[0] * mana[j]
-
-        # Remaining wizards
-        for i in range(1, n):
-            curr[0] = prev[0] + skill[i] * mana[0]
-            for j in range(1, m):
-                curr[j] = max(prev[j], curr[j-1]) + skill[i] * mana[j]
-            prev, curr = curr, prev  # swap
-
-        return prev[m-1]
-            
+        
+       
+        dp = [[0]*m for _ in range(n)]
+        
+        for i in range(n):
+            for j in range(m):
+                time = skill[i] * mana[j]
+                
+                if i == 0 and j == 0:
+                    dp[i][j] = time
+                elif i == 0:
+                    dp[i][j] = dp[i][j-1] + time
+                elif j == 0:
+                    dp[i][j] = dp[i-1][j] + time
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1]) + time
+        
+        return dp[-1][-1]
