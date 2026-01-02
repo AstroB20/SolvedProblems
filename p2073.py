@@ -11,5 +11,6 @@ class Solution(object):
                 result += min(tickets[i],tickets[k])
             else:
                 result += min(tickets[i],tickets[k]-1)
-        return result
+ x       return result
 
+x
